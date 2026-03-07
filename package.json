@@ -1,0 +1,73 @@
+{
+  "name": "leekscript",
+  "displayName": "LeekScript",
+  "description": "LeekScript language support (syntax, diagnostics, hover, go-to-definition, format) via leekscript-lsp",
+  "version": "0.1.0",
+  "publisher": "leekscript",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:leekscript"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "leekscript",
+        "aliases": [
+          "LeekScript",
+          "leekscript"
+        ],
+        "extensions": [
+          ".leek"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "leekscript",
+        "scopeName": "source.leek",
+        "path": "./syntaxes/leekscript.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "LeekScript",
+      "properties": {
+        "leekscript.server.path": {
+          "type": "string",
+          "default": "leekscript-lsp",
+          "description": "Path to the leekscript-lsp executable. Use a full path if the binary is not on PATH."
+        },
+        "leekscript.loadStdlibSignatures": {
+          "type": "boolean",
+          "default": true,
+          "description": "Load the embedded LeekScript standard library signatures (.sig) so built-in functions and constants are recognized (completion, hover, diagnostics)."
+        },
+        "leekscript.signatureFiles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Additional paths to .sig files to load (e.g. custom API definitions). Paths are resolved relative to the workspace root."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.0"
+  }
+}

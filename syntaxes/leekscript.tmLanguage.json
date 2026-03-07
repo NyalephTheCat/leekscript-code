@@ -1,0 +1,63 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "LeekScript",
+  "scopeName": "source.leek",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#keywords" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.leek",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.leek",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.leek",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [{ "name": "constant.character.escape.leek", "match": "\\\\." }]
+        },
+        {
+          "name": "string.quoted.single.leek",
+          "begin": "'",
+          "end": "'",
+          "patterns": [{ "name": "constant.character.escape.leek", "match": "\\\\." }]
+        }
+      ]
+    },
+    "numbers": {
+      "match": "\\b(\\d+\\.?\\d*|\\d*\\.\\d+)([eE][+-]?\\d+)?[mM]?\\b",
+      "name": "constant.numeric.leek"
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\b(var|let|const|global|function|return|if|else|while|for|do|break|continue|in|class|extends|new|this|super|true|false|null|include|as|and|or|not|xor|instanceof|try|catch|throw|switch|case|default|abstract|final|constructor|static|public|private|protected)\\b",
+          "name": "keyword.control.leek"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "(===|!==|==|!=|<=|>=|[+\\-*/%]=|->|=>|[+\\-*/%<>]=?|\\|\||&&|\\||&|\\^|!|\\?|:|\\.\\.\\.|\\.\\.)",
+          "name": "keyword.operator.leek"
+        }
+      ]
+    }
+  }
+}
