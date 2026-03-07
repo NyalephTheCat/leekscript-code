@@ -1,7 +1,7 @@
 {
   "name": "leekscript",
   "displayName": "LeekScript",
-  "description": "LeekScript language support (syntax, diagnostics, hover, go-to-definition, format) via leekscript-lsp",
+  "description": "LeekScript language support (syntax, diagnostics, hover, inlay type hints, go-to-definition, find-references, document highlight, folding ranges, selection range, document links for includes, format/range format, workspace symbol search, rename, code actions) via leekscript-lsp",
   "version": "0.1.0",
   "publisher": "leekscript",
   "engines": {
@@ -15,6 +15,17 @@
     "onLanguage:leekscript"
   ],
   "contributes": {
+    "commands": [
+      {
+        "command": "leekscript.restart",
+        "title": "LeekScript: Restart Language Server"
+      }
+    ],
+    "configurationDefaults": {
+      "[leekscript]": {
+        "editor.inlayHints.enabled": "on"
+      }
+    },
     "languages": [
       {
         "id": "leekscript",
@@ -53,6 +64,11 @@
           "items": { "type": "string" },
           "default": [],
           "description": "Additional paths to .sig files to load (e.g. custom API definitions). Paths are resolved relative to the workspace root."
+        },
+        "leekscript.inlayHints.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show inlay hints for variable types (e.g. \": integer\" after variable names). Requires editor.inlayHints.enabled to be on."
         }
       }
     }

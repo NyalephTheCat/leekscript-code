@@ -13,13 +13,48 @@
     "comments": {
       "patterns": [
         {
-          "name": "comment.line.double-slash.leek",
+          "name": "comment.line.documentation",
+          "begin": "//(/|!)",
+          "end": "$",
+          "patterns": [
+            { "include": "#doxygen-tags" }
+          ]
+        },
+        {
+          "name": "comment.line",
           "match": "//.*$"
         },
         {
-          "name": "comment.block.leek",
+          "name": "comment.block.documentation",
+          "begin": "/\\*\\*",
+          "end": "\\*/",
+          "patterns": [
+            { "include": "#doxygen-tags" }
+          ]
+        },
+        {
+          "name": "comment.block.documentation",
+          "begin": "/\\*!",
+          "end": "\\*/",
+          "patterns": [
+            { "include": "#doxygen-tags" }
+          ]
+        },
+        {
+          "name": "comment.block",
           "begin": "/\\*",
-          "end": "\\*/"
+          "end": "\\*/",
+          "patterns": [
+            { "include": "#doxygen-tags" }
+          ]
+        }
+      ]
+    },
+    "doxygen-tags": {
+      "patterns": [
+        {
+          "match": "(@|\\\\)(param|return|returns|brief|deprecated|see|since|throws|author|version|note|warning|todo|code|endcode|pre|post|invariant)\\b",
+          "name": "keyword.other.documentation.leek"
         }
       ]
     },
@@ -46,8 +81,12 @@
     "keywords": {
       "patterns": [
         {
-          "match": "\\b(var|let|const|global|function|return|if|else|while|for|do|break|continue|in|class|extends|new|this|super|true|false|null|include|as|and|or|not|xor|instanceof|try|catch|throw|switch|case|default|abstract|final|constructor|static|public|private|protected)\\b",
-          "name": "keyword.control.leek"
+          "match": "\\b(abstract|final|private|protected|public|static)\\b",
+          "name": "storage.modifier"
+        },
+        {
+          "match": "\\b(var|let|const|global|function|return|if|else|while|for|do|break|continue|in|class|extends|new|this|super|true|false|null|include|as|and|or|not|xor|instanceof|try|catch|throw|switch|case|default|constructor|reserved)\\b",
+          "name": "keyword.control"
         }
       ]
     },

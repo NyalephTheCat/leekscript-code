@@ -1,6 +1,6 @@
 # LeekScript for VS Code
 
-Language support for [LeekScript](https://leekscript.com) in Visual Studio Code: syntax highlighting, diagnostics, and hover (inferred types) via the **leekscript-lsp** language server.
+Language support for [LeekScript](https://leekscript.com) in Visual Studio Code: syntax highlighting, diagnostics, hover (inferred types), go to definition, find references, and more via the **leekscript-lsp** language server.
 
 ## Requirements
 
@@ -16,7 +16,7 @@ cargo build -p leekscript-lsp
 
 ## Installation
 
-### Option A: Install from VSIX (Cursor or VS Code)
+### Option A: Install from VSIX
 
 1. Build the VSIX (from the `leekscript-vscode` folder):
    ```bash
@@ -24,15 +24,13 @@ cargo build -p leekscript-lsp
    ```
    This creates `leekscript-0.1.0.vsix`.
 
-2. **In Cursor** (or VS Code):
+2. In VS Code:
    - Press **Ctrl+Shift+P** (Mac: **Cmd+Shift+P**) to open the Command Palette.
    - Run **“Extensions: Install from VSIX…”**.
    - Choose the `leekscript-0.1.0.vsix` file.
    - Reload the window if prompted.
 
-   Alternatively, drag `leekscript-0.1.0.vsix` onto the Extensions sidebar in Cursor.
-
-   Note: `cursor --install-extension` is not supported in Cursor; use the Command Palette or drag-and-drop instead.
+   Alternatively, drag `leekscript-0.1.0.vsix` onto the Extensions sidebar.
 
 ### Option B: Run from source (development)
 
@@ -59,6 +57,8 @@ For local development, set a full path, for example:
 - **Syntax highlighting** for `.leek` files (keywords, strings, numbers, comments).
 - **Diagnostics** from the language server (parse errors, type errors, deprecations).
 - **Hover** showing inferred types for expressions and variables.
+- **Go to Definition** (F12): jump to the definition of variables, functions, and classes.
+- **Find References** (Shift+F12): list all references to the symbol under the cursor.
 
 ## License
 
