@@ -1,9 +1,9 @@
 {
-  "name": "leekscript",
-  "displayName": "LeekScript",
+  "name": "leekscript-lsp",
+  "displayName": "LeekScript LSP",
   "description": "LeekScript language support (syntax, diagnostics, completion, hover, inlay type hints, go-to-definition, find-references, document highlight, folding ranges, selection range, document links for includes, format/range format, workspace symbol search, rename, code actions, code lens) via leekscript-lsp",
   "version": "0.1.0",
-  "publisher": "leekscript",
+  "publisher": "Nyaleph",
   "engines": {
     "vscode": "^1.74.0"
   },
