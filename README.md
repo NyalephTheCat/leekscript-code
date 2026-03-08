@@ -4,14 +4,10 @@ Language support for [LeekScript](https://leekscript.com) in Visual Studio Code:
 
 ## Requirements
 
-- **leekscript-lsp** must be built and available on your `PATH`, or you must set its path in settings.
-
-Build the LSP from the parsing workspace:
+- **leekscript-lsp** available in your `$PATH` or specified in a parameter. You can download it here:
 
 ```bash
-cd /path/to/parsing
-cargo build -p leekscript-lsp
-# Ensure target/debug/leekscript-lsp (or release) is on PATH, or set leekscript.server.path
+cargo install leekscript-lsp
 ```
 
 ## Installation
