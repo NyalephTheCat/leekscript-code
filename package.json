@@ -1,7 +1,7 @@
 {
   "name": "leekscript",
   "displayName": "LeekScript",
-  "description": "LeekScript language support (syntax, diagnostics, hover, inlay type hints, go-to-definition, find-references, document highlight, folding ranges, selection range, document links for includes, format/range format, workspace symbol search, rename, code actions) via leekscript-lsp",
+  "description": "LeekScript language support (syntax, diagnostics, completion, hover, inlay type hints, go-to-definition, find-references, document highlight, folding ranges, selection range, document links for includes, format/range format, workspace symbol search, rename, code actions, code lens) via leekscript-lsp",
   "version": "0.1.0",
   "publisher": "leekscript",
   "engines": {
@@ -10,6 +10,10 @@
   "categories": [
     "Programming Languages"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NyalephTheCat/leekscript-code"
+  },
   "main": "./out/extension.js",
   "activationEvents": [
     "onLanguage:leekscript"
@@ -19,11 +23,18 @@
       {
         "command": "leekscript.restart",
         "title": "LeekScript: Restart Language Server"
+      },
+      {
+        "command": "leekscript.showReferences",
+        "title": "LeekScript: Show References",
+        "enablement": "editorLangId == leekscript"
       }
     ],
     "configurationDefaults": {
       "[leekscript]": {
-        "editor.inlayHints.enabled": "on"
+        "editor.inlayHints.enabled": "on",
+        "editor.codeLens": true,
+        "editor.semanticHighlighting.enabled": true
       }
     },
     "languages": [
@@ -69,6 +80,11 @@
           "type": "boolean",
           "default": true,
           "description": "Show inlay hints for variable types (e.g. \": integer\" after variable names). Requires editor.inlayHints.enabled to be on."
+        },
+        "leekscript.codeLens.references": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show code lens with reference count above functions, classes, and methods (e.g. \"3 references\"). Clicking the lens runs Find All References. Requires Editor: Code Lens to be enabled."
         }
       }
     }

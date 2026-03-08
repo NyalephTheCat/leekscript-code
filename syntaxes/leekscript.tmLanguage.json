@@ -42,7 +42,7 @@
         },
         {
           "name": "comment.block",
-          "begin": "/\\*",
+          "begin": "/\\*(?!\\*)(?!!)",
           "end": "\\*/",
           "patterns": [
             { "include": "#doxygen-tags" }
@@ -53,7 +53,7 @@
     "doxygen-tags": {
       "patterns": [
         {
-          "match": "(@|\\\\)(param|return|returns|brief|deprecated|see|since|throws|author|version|note|warning|todo|code|endcode|pre|post|invariant)\\b",
+          "match": "(@|\\\\)(param|return|returns|retval|brief|details|deprecated|see|since|throws|exception|author|version|note|warning|todo|code|endcode|pre|post|par|invariant|class|struct|union|enum|namespace|file|package|var|fn|def|addtogroup|ingroup|mainpage|example|test|ref|hideinitializer|showinitializer|name|title|date|bug)\\b",
           "name": "keyword.other.documentation.leek"
         }
       ]

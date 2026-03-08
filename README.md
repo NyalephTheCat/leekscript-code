@@ -43,6 +43,7 @@ cargo build -p leekscript-lsp
 | Setting | Description | Default |
 |--------|-------------|---------|
 | `leekscript.server.path` | Path to the `leekscript-lsp` executable. | `leekscript-lsp` (must be on PATH) |
+| `leekscript.codeLens.references` | Show “N references” code lens above functions, classes, and methods. | `true` |
 
 For local development, set a full path, for example:
 
@@ -59,6 +60,7 @@ For local development, set a full path, for example:
 - **Hover** showing inferred types for expressions and variables.
 - **Go to Definition** (F12): jump to the definition of variables, functions, and classes.
 - **Find References** (Shift+F12): list all references to the symbol under the cursor.
+- **Code Lens**: reference count above functions, classes, and methods (e.g. “3 references”); click to run Find All References. Enable with `leekscript.codeLens.references` and ensure **Editor: Code Lens** is on.
 
 ## License
 

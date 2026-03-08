@@ -1,5 +1,13 @@
 import * as path from "path";
-import { workspace, ExtensionContext, commands } from "vscode";
+import {
+  workspace,
+  window,
+  ExtensionContext,
+  commands,
+  Uri,
+  Position,
+  Selection,
+} from "vscode";
 import {
   LanguageClient,
   LanguageClientOptions,
@@ -19,10 +27,12 @@ function getLeekscriptConfig() {
       ? signatureFiles.map((p) => path.join(rootUri.fsPath, p))
       : signatureFiles;
   const inlayHintsEnabled = config.get<boolean>("inlayHints.enabled") ?? true;
+  const codeLensReferences = config.get<boolean>("codeLens.references") ?? true;
   return {
     loadStdlibSignatures: config.get<boolean>("loadStdlibSignatures") ?? true,
     signatureFiles: resolved,
     inlayHints: { enabled: inlayHintsEnabled },
+    codeLens: { references: codeLensReferences },
   };
 }
 
@@ -56,6 +66,21 @@ export async function activate(context: ExtensionContext): Promise<void> {
     commands.registerCommand("leekscript.restart", async () => {
       await restartServer();
     })
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand(
+      "leekscript.showReferences",
+      async (uriStr: string, position: { line: number; character: number }) => {
+        const uri = Uri.parse(uriStr);
+        const doc = await workspace.openTextDocument(uri);
+        const editor = await window.showTextDocument(doc);
+        const pos = new Position(position.line, position.character);
+        editor.selection = new Selection(pos, pos);
+        editor.revealRange(editor.selection);
+        await commands.executeCommand("editor.action.referenceSearch.trigger");
+      }
+    )
   );
 }
 
