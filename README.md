@@ -2,6 +2,8 @@
 
 Language support for [LeekScript](https://leekscript.com) in Visual Studio Code: syntax highlighting, diagnostics, hover (inferred types), go to definition, find references, and more via the **leekscript-lsp** language server.
 
+This extension is part of the **parsing** workspace. Build and run from the repo root for the full stack; see [CONTRIBUTING.md](CONTRIBUTING.md) and [ARCHITECTURE.md](ARCHITECTURE.md) for where to edit what.
+
 ## Requirements
 
 - **leekscript-lsp** available in your `$PATH` or specified in a parameter. You can download it here:
@@ -38,10 +40,13 @@ cargo install leekscript-lsp
 
 | Setting | Description | Default |
 |--------|-------------|---------|
-| `leekscript.server.path` | Path to the `leekscript-lsp` executable. | `leekscript-lsp` (must be on PATH) |
-| `leekscript.codeLens.references` | Show “N references” code lens above functions, classes, and methods. | `true` |
+| `leekscript.server.path` | Path to the `leekscript-lsp` executable. Use a full path if the binary is not on PATH. | `leekscript-lsp` |
+| `leekscript.loadStdlibSignatures` | Load the bundled standard library `.sig` files so built-in functions and constants are recognized (completion, hover, diagnostics). | `true` |
+| `leekscript.signatureFiles` | Additional paths to `.sig` files (e.g. custom API definitions). Paths are resolved relative to the workspace root. | `[]` |
+| `leekscript.inlayHints.enabled` | Show inlay hints for variable types (e.g. ": integer"). Requires **Editor: Inlay Hints** to be on. | `true` |
+| `leekscript.codeLens.references` | Show “N references” code lens above functions, classes, and methods. Requires **Editor: Code Lens** to be enabled. | `true` |
 
-For local development, set a full path, for example:
+For local development, set a full path for the server, for example:
 
 ```json
 {
@@ -57,6 +62,16 @@ For local development, set a full path, for example:
 - **Go to Definition** (F12): jump to the definition of variables, functions, and classes.
 - **Find References** (Shift+F12): list all references to the symbol under the cursor.
 - **Code Lens**: reference count above functions, classes, and methods (e.g. “3 references”); click to run Find All References. Enable with `leekscript.codeLens.references` and ensure **Editor: Code Lens** is on.
+
+## Development
+
+From the `leekscript-vscode` folder:
+
+```bash
+npm install && npm run compile && npx vsce package --no-dependencies
+```
+
+Press **F5** in VS Code to launch the extension in a Development Host. See [CONTRIBUTING.md](CONTRIBUTING.md) for extension-specific setup and the root [CONTRIBUTING.md](../CONTRIBUTING.md) and [cursor.md](../cursor.md) for workspace conventions.
 
 ## License
 
