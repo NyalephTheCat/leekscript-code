@@ -17,19 +17,26 @@ import {
 let client: LanguageClient | undefined;
 let serverOptions: ServerOptions | undefined;
 let clientOptions: LanguageClientOptions | undefined;
+let extensionPathForConfig: string = "";
 
-function getLeekscriptConfig() {
+function getLeekscriptConfig(extensionPath: string) {
   const config = workspace.getConfiguration("leekscript");
   const signatureFiles = config.get<string[]>("signatureFiles") ?? [];
   const rootUri = workspace.workspaceFolders?.[0]?.uri;
-  const resolved =
+  let resolved: string[] =
     rootUri && signatureFiles.length > 0
       ? signatureFiles.map((p) => path.join(rootUri.fsPath, p))
       : signatureFiles;
+  const loadStdlibSignatures =
+    config.get<boolean>("loadStdlibSignatures") ?? true;
+  // When stdlib loading is enabled and no custom paths are set, pass the extension's bundled signatures dir so the LSP can load built-in API definitions.
+  if (loadStdlibSignatures && resolved.length === 0 && extensionPath) {
+    resolved = [path.join(extensionPath, "signatures")];
+  }
   const inlayHintsEnabled = config.get<boolean>("inlayHints.enabled") ?? true;
   const codeLensReferences = config.get<boolean>("codeLens.references") ?? true;
   return {
-    loadStdlibSignatures: config.get<boolean>("loadStdlibSignatures") ?? true,
+    loadStdlibSignatures,
     signatureFiles: resolved,
     inlayHints: { enabled: inlayHintsEnabled },
     codeLens: { references: codeLensReferences },
@@ -37,6 +44,7 @@ function getLeekscriptConfig() {
 }
 
 export async function activate(context: ExtensionContext): Promise<void> {
+  extensionPathForConfig = context.extensionPath;
   const config = workspace.getConfiguration("leekscript");
   const serverPath = config.get<string>("server.path") ?? "leekscript-lsp";
 
@@ -47,7 +55,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
 
   const copts: LanguageClientOptions = {
     documentSelector: [{ scheme: "file", language: "leekscript" }],
-    initializationOptions: getLeekscriptConfig(),
+    initializationOptions: getLeekscriptConfig(extensionPathForConfig),
   };
 
   serverOptions = sopts;
@@ -90,7 +98,7 @@ async function restartServer(): Promise<void> {
   const sopts: ServerOptions = { command: serverPath, args: [] };
   const copts: LanguageClientOptions = {
     documentSelector: [{ scheme: "file", language: "leekscript" }],
-    initializationOptions: getLeekscriptConfig(),
+    initializationOptions: getLeekscriptConfig(extensionPathForConfig),
   };
   serverOptions = sopts;
   clientOptions = copts;
