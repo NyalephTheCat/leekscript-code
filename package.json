@@ -57,6 +57,19 @@
         "path": "./syntaxes/leekscript.tmLanguage.json"
       }
     ],
+    "semanticTokenScopes": [
+      {
+        "language": "leekscript",
+        "scopes": {
+          "typeParameter": [
+            "entity.name.type.parameter"
+          ],
+          "type:defaultLibrary": [
+            "support.type.primitive"
+          ]
+        }
+      }
+    ],
     "configuration": {
       "title": "LeekScript",
       "properties": {

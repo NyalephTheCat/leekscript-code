@@ -16,23 +16,23 @@ cargo install leekscript-lsp
 
 ### Option A: Install from VSIX
 
-1. Build the VSIX (from the `leekscript-vscode` folder):
+1. Build the VSIX (from the `leekscript-code` folder):
    ```bash
-   npm install && npm run compile && npx vsce package --no-dependencies
+   npm install && npm run compile && npx vsce package
    ```
-   This creates `leekscript-0.1.0.vsix`.
+   Do **not** use `vsce package --no-dependencies`: the extension needs `vscode-languageclient` shipped inside the VSIX (see `.vscodeignore`). This creates `leekscript-lsp-0.1.0.vsix` (version from `package.json`).
 
 2. In VS Code:
    - Press **Ctrl+Shift+P** (Mac: **Cmd+Shift+P**) to open the Command Palette.
    - Run **“Extensions: Install from VSIX…”**.
-   - Choose the `leekscript-0.1.0.vsix` file.
+   - Choose the generated `.vsix` file.
    - Reload the window if prompted.
 
-   Alternatively, drag `leekscript-0.1.0.vsix` onto the Extensions sidebar.
+   Alternatively, drag the `.vsix` onto the Extensions sidebar.
 
 ### Option B: Run from source (development)
 
-1. Open the extension folder: `File > Open Folder` → select `leekscript-vscode`.
+1. Open the extension folder: `File > Open Folder` → select `leekscript-code`.
 2. Press **F5** to launch a new window with the extension loaded (Development Host).
 3. Open a `.leek` file to activate; you should get diagnostics and hover if the LSP is running.
 
@@ -65,10 +65,10 @@ For local development, set a full path for the server, for example:
 
 ## Development
 
-From the `leekscript-vscode` folder:
+From the `leekscript-code` folder:
 
 ```bash
-npm install && npm run compile && npx vsce package --no-dependencies
+npm install && npm run compile && npx vsce package
 ```
 
 Press **F5** in VS Code to launch the extension in a Development Host. See [CONTRIBUTING.md](CONTRIBUTING.md) for extension-specific setup and the root [CONTRIBUTING.md](../CONTRIBUTING.md) and [cursor.md](../cursor.md) for workspace conventions.
