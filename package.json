@@ -94,6 +94,11 @@
           "default": true,
           "description": "Show inlay hints for variable types (e.g. \": integer\" after variable names). Requires editor.inlayHints.enabled to be on."
         },
+        "leekscript.inlayHints.hideAny": {
+          "type": "boolean",
+          "default": false,
+          "description": "Hide low-signal inferred type hints that are just \": any\"."
+        },
         "leekscript.codeLens.references": {
           "type": "boolean",
           "default": true,

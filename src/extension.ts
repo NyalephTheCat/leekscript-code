@@ -35,11 +35,12 @@ function getLeekscriptConfig(extensionPath: string) {
     resolved = [path.join(extensionPath, "signatures")];
   }
   const inlayHintsEnabled = config.get<boolean>("inlayHints.enabled") ?? true;
+  const inlayHintsHideAny = config.get<boolean>("inlayHints.hideAny") ?? false;
   const codeLensReferences = config.get<boolean>("codeLens.references") ?? true;
   return {
     loadStdlibSignatures,
     signatureFiles: resolved,
-    inlayHints: { enabled: inlayHintsEnabled },
+    inlayHints: { enabled: inlayHintsEnabled, hideAny: inlayHintsHideAny },
     codeLens: { references: codeLensReferences },
   };
 }

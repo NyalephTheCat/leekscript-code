@@ -44,6 +44,7 @@ cargo install leekscript-lsp
 | `leekscript.loadStdlibSignatures` | Load the bundled standard library `.sig` files so built-in functions and constants are recognized (completion, hover, diagnostics). | `true` |
 | `leekscript.signatureFiles` | Additional paths to `.sig` files (e.g. custom API definitions). Paths are resolved relative to the workspace root. | `[]` |
 | `leekscript.inlayHints.enabled` | Show inlay hints for variable types (e.g. ": integer"). Requires **Editor: Inlay Hints** to be on. | `true` |
+| `leekscript.inlayHints.hideAny` | Hide low-signal inferred type hints that are just ": any". | `false` |
 | `leekscript.codeLens.references` | Show “N references” code lens above functions, classes, and methods. Requires **Editor: Code Lens** to be enabled. | `true` |
 
 For local development, set a full path for the server, for example:
